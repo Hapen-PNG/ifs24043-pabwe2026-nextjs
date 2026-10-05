@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     inlineCss: true,
+    optimizePackageImports: ["react-icons"],
   },
   async rewrites() {
     return [

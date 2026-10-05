@@ -1,18 +1,9 @@
-'use client';
-
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { getAccessToken } from '@/helpers/apiHelper';
+import AuthRedirect from '@/features/auth/components/AuthRedirect';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (getAccessToken()) router.replace('/posts');
-  }, [router]);
-
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-sky-50 via-white to-indigo-50">
+      <AuthRedirect />
       <aside
         className="hidden md:flex md:w-1/2 bg-sky-800 text-white p-12 flex-col justify-center items-center relative overflow-hidden"
         aria-label="Informasi aplikasi"
