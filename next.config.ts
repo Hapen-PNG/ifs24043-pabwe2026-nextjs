@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  generateEtags: false,
   turbopack: {
     root: process.cwd(),
   },
@@ -24,6 +25,19 @@ const nextConfig: NextConfig = {
       {
         source: "/default/img/:path*",
         destination: "https://open-api.delcom.org/default/img/:path*",
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/auth/login",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, no-cache, must-revalidate",
+          },
+        ],
       },
     ];
   },

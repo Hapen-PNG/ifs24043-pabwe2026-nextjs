@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/auth/login"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate"
