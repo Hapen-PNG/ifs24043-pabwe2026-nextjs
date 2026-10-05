@@ -1,15 +1,18 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "@/features/auth/states/authSlice";
-import postReducer from "@/features/posts/states/postSlice";
-import userReducer from "@/features/users/states/userSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from '@/features/auth/states/reducer';
+import usersReducer from '@/features/users/states/reducer';
+import postsReducer from '@/features/posts/states/reducer';
 
-export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    posts: postReducer,
-    users: userReducer,
-  },
-});
+export function makeStore() {
+  return configureStore({
+    reducer: {
+      auth: authReducer,
+      users: usersReducer,
+      posts: postsReducer,
+    },
+  });
+}
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];

@@ -1,25 +1,50 @@
-import { fetchApi } from "@/helpers/apiHelper";
+import { apiFetch } from '@/helpers/apiHelper';
 
-export const postApi = {
-  getAll: () => fetchApi("/posts"),
-  getById: (id: string | number) => fetchApi(`/posts/${id}`),
-  create: (data: { title: string; content: string }) =>
-    fetchApi("/posts", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
-  update: (id: string | number, data: { title: string; content: string }) =>
-    fetchApi(`/posts/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    }),
-  delete: (id: string | number) =>
-    fetchApi(`/posts/${id}`, {
-      method: "DELETE",
-    }),
-  updateCover: (id: string | number, coverUrl: string) =>
-    fetchApi(`/posts/${id}/cover`, {
-      method: "PATCH",
-      body: JSON.stringify({ cover: coverUrl }),
-    }),
-};
+export async function getPosts(params: Record<string, any> = {}) {
+  return apiFetch('/posts', { params });
+}
+
+export async function getPostById(id: string | number) {
+  return apiFetch(`/posts/${id}`);
+}
+
+export async function addPost(payload: { description: string }) {
+  return apiFetch('/posts', { method: 'POST', body: payload });
+}
+
+export async function updatePost(id: string | number, payload: { description: string }) {
+  return apiFetch(`/posts/${id}`, { method: 'PUT', body: payload });
+}
+
+export async function changeCover(id: string | number, file: File) {
+  const formData = new FormData();
+  formData.append('cover', file);
+  return apiFetch(`/posts/${id}/cover`, {
+    method: 'POST',
+    body: formData,
+    isFormData: true,
+  });
+}
+
+export async function deletePost(id: string | number) {
+  return apiFetch(`/posts/${id}`, { method: 'DELETE' });
+}
+
+export async function likePost(id: string | number, like: 0 | 1 = 1) {
+  return apiFetch(`/posts/${id}/likes`, {
+    method: 'POST',
+    body: { like },
+  });
+}
+
+export async function addComment(id: string | number, payload: { comment: string }) {
+  return apiFetch(`/posts/${id}/comments`, { method: 'POST', body: payload });
+}
+
+export async function deleteComment(postId: string | number, commentId: string | number) {
+  return apiFetch(`/posts/${postId}/comments/${commentId}`, { method: 'DELETE' });
+}
+
+export async function deleteAllPosts() {
+  return apiFetch('/posts', { method: 'DELETE' });
+}

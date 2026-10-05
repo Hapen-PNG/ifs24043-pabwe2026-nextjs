@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-slate-900 text-slate-100 min-h-screen font-sans antialiased;
-  }
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
-.glass-panel {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-sans);
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 antialiased;
 }

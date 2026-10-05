@@ -1,25 +1,25 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Providers from "@/components/Providers";
-import "./globals.css"; // Gunakan path relative ./globals.css
+import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
+import StoreProvider from '@/store/StoreProvider';
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: "DelcomFeed - Praktikum PABWE 2026",
-  description: "Aplikasi Publikasi & Diskusi Mahasiswa",
-  robots: { index: true, follow: true },
+  title: 'Posts - Delcom',
+  description:
+    'Aplikasi manajemen postingan Delcom — bagikan status, like, dan komentar.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+    <html lang="id" className={jakarta.className}>
+      <body>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );
