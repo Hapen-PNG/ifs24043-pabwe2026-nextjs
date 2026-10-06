@@ -43,7 +43,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <NavbarComponent onToggleSidebar={() => setSidebarOpen((v) => !v)} />
       <div className="flex flex-1 overflow-hidden">
         <SidebarComponent open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        <div className="flex-1 overflow-y-auto p-4 md:p-6">{children}</div>
       </div>
     </div>
   );

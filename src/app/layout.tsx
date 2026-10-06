@@ -19,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" className={jakarta.className}>
       <body>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <main>{children}</main>
+        </StoreProvider>
       </body>
     </html>
   );
